@@ -1,4 +1,5 @@
 import remarkGfm from 'remark-gfm'
+import rehypePlantUml from './lib/rehype-plantuml.mjs'
 import rehypePrettyCode from 'rehype-pretty-code'
 import createMDX from '@next/mdx'
 
@@ -24,8 +25,13 @@ const nextConfig = {
 const withMDX = createMDX({
   // Add markdown plugins here, as desired
   options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypePrettyCode],
+    remarkPlugins: [
+			remarkGfm, 
+		],
+    rehypePlugins: [
+			rehypePlantUml,
+			rehypePrettyCode,
+		],
   },
 })
 
