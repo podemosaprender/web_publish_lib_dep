@@ -1,4 +1,6 @@
-const withMDX = require('@next/mdx')()
+import remarkGfm from 'remark-gfm'
+import rehypePrettyCode from 'rehype-pretty-code'
+import createMDX from '@next/mdx'
 
 /**
  * @type {import('next').NextConfig}
@@ -16,4 +18,12 @@ const nextConfig = {
 	//A: Optional: Prevent automatic `/me` -> `/me/`, instead preserve `href`
 }
  
-module.exports = withMDX(nextConfig)
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+  options: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [rehypePrettyCode],
+  },
+})
+
+export default withMDX(nextConfig)
