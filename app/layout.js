@@ -4,9 +4,8 @@ import {Providers} from "../lib/providers";
 
 export default function RootLayout({children}) {
   return (
-    <html lang="en" className='dark'>
+    <html lang="en" suppressHydrationWarning className='dark'>
       <body>
-				<p>Hola</p>
         <Providers>
           {children}
         </Providers>
@@ -14,5 +13,3 @@ export default function RootLayout({children}) {
     </html>
   );
 }
-
-console.log("ROOT LAYOUT")
