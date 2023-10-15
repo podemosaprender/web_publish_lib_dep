@@ -8,6 +8,9 @@ import createMDX from '@next/mdx'
 const nextConfig = {
   output: 'export',
 
+	basePath: (process.env.GITHUB_REPOSITORY||'').replace(/^[^\/]*/,''), //ej: "/nextjs-github-pages",
+	//SEE: https://nextjs.org/docs/app/api-reference/next-config-js/basePath
+
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 	//A: Configure `pageExtensions`` to include MDX files
 
