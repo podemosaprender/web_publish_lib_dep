@@ -1,5 +1,5 @@
 import remarkGfm from 'remark-gfm'
-import rehypePlantUml from './lib/rehype-plantuml.mjs'
+import rehypePlantUml from './src/lib/rehype-plantuml.mjs'
 import rehypePrettyCode from 'rehype-pretty-code'
 import createMDX from '@next/mdx'
 
