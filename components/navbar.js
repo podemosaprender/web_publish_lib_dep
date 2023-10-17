@@ -1,11 +1,11 @@
 'use client'
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
+import {Navbar as NextUINavbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
 import {AcmeLogo} from "./AcmeLogo";
 
-export default function App() {
+export function Navbar() {
   return (
-    <Navbar>
+    <NextUINavbar>
       <NavbarBrand>
         <AcmeLogo />
         <p className="font-bold text-inherit">ACME</p>
@@ -37,7 +37,7 @@ export default function App() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-    </Navbar>
+    </NextUINavbar>
   );
 }
 
