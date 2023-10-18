@@ -67,7 +67,7 @@ async function xfrmPlantUMLNode(node, opts) {
 			res=`<svg height="100" width="100"> <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /> Sorry, your browser does not support inline SVG.  </svg>`;
 		}
 
-		//Remving the <svg> tag
+		//Stradex: Doing some bad RegEx to remove the <pre> and <svg> tags from res and replace it with my own custom styled <svg> tag.
 		res = res.replace(/^<pre>/, '');
 		res = res.replace(/<\/pre>$/, '');
 		res = res.replace(/<\/svg>$/, '');
@@ -75,9 +75,9 @@ async function xfrmPlantUMLNode(node, opts) {
 		res = res.replace(/<\/svg>$/, '');
 
 		res = `<svg
-					style="width: inherit; height: inherit;"
+					class="w-1/2"
 					version="1.1" 
-					viewBox="0 0 31.921 36.45" 
+					viewBox="0 0 100 100" 
 		xmlns="http://www.w3.org/2000/svg">${res}</svg>`; 
 		Object.assign(node, await parseSVG(res))
 	} else if (node.children) { 
