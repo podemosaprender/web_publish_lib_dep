@@ -1,5 +1,4 @@
 import plantumlEncoder from 'plantuml-encoder';
-import { parse } from 'node-html-parser';
 import {VFile} from "vfile";
 
 import {rehype} from 'rehype';
@@ -61,28 +60,14 @@ async function xfrmPlantUMLNode(node, opts) {
 		let src= node.children[0].value;
     let url = `${opts.baseUrl.replace(/\/$/, "")}/${plantumlEncoder.encode(src)}`;
 		//console.log("xfrmPlantUMLNode",{url, src});
+		//Stradex: adding a try-catch to ensure that we will always get a SVG element, even if it is a failed one.
+		//			To avoid issues with github actions and the fetch() method.
 		let res;
 		try {
 			res = await fetch(url).then(r => r.text());
 		} catch (error) {
 			res=`<svg height="100" width="100"> <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /> Sorry, your browser does not support inline SVG.  </svg>`;
-		}
-
-		//Stradex: Doing some bad RegEx to remove the <pre> and <svg> tags from res and replace it with my own custom styled <svg> tag.
-		res = res.replace(/^<pre>/, '');
-		res = res.replace(/<\/pre>$/, '');
-
-		//Stradex: get the SVG original viewBox attribute
-		let viewBoxString = parse(res).getAttribute('viewBox');
-		res = res.replace(/<\/svg>$/, '');
-		res = res.replace(/^<svg.*?>/, '');
-		res = res.replace(/<\/svg>$/, '');
-
-		res = `<svg
-					class="w-1/2"
-					version="1.1" 
-					viewBox="${viewBoxString}" 
-		xmlns="http://www.w3.org/2000/svg">${res}</svg>`; 
+		} 
 		Object.assign(node, await parseSVG(res))
 	} else if (node.children) { 
 		await Promise.all( node.children.map( n => xfrmPlantUMLNode(n, opts)) ) }
