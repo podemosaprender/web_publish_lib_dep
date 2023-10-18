@@ -60,8 +60,12 @@ async function xfrmPlantUMLNode(node, opts) {
 		let src= node.children[0].value;
     let url = `${opts.baseUrl.replace(/\/$/, "")}/${plantumlEncoder.encode(src)}`;
 		//console.log("xfrmPlantUMLNode",{url, src});
-		let res = await fetch(url).then(r => r.text());
-		//let res=`<svg height="100" width="100"> <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /> Sorry, your browser does not support inline SVG.  </svg>`;
+		let res;
+		try {
+			res = await fetch(url).then(r => r.text());
+		} catch (error) {
+			res=`<svg height="100" width="100"> <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /> Sorry, your browser does not support inline SVG.  </svg>`;
+		}
 		Object.assign(node, await parseSVG(res))
 	} else if (node.children) { 
 		await Promise.all( node.children.map( n => xfrmPlantUMLNode(n, opts)) ) }
