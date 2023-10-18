@@ -70,6 +70,9 @@ async function xfrmPlantUMLNode(node, opts) {
 		//Stradex: Doing some bad RegEx to remove the <pre> and <svg> tags from res and replace it with my own custom styled <svg> tag.
 		res = res.replace(/^<pre>/, '');
 		res = res.replace(/<\/pre>$/, '');
+
+		//Stradex: get the SVG original viewBox attribute
+		let viewBoxString = (new DOMParser()).parseFromString(res, 'application/xml').documentElement.getAttribute('viewBox');
 		res = res.replace(/<\/svg>$/, '');
 		res = res.replace(/^<svg.*?>/, '');
 		res = res.replace(/<\/svg>$/, '');
@@ -77,7 +80,7 @@ async function xfrmPlantUMLNode(node, opts) {
 		res = `<svg
 					class="w-1/2"
 					version="1.1" 
-					viewBox="0 0 100 100" 
+					viewBox="${viewBoxString}" 
 		xmlns="http://www.w3.org/2000/svg">${res}</svg>`; 
 		Object.assign(node, await parseSVG(res))
 	} else if (node.children) { 
