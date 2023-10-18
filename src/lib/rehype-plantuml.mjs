@@ -1,4 +1,5 @@
 import plantumlEncoder from 'plantuml-encoder';
+import { parse } from 'node-html-parser';
 import {VFile} from "vfile";
 
 import {rehype} from 'rehype';
@@ -72,7 +73,7 @@ async function xfrmPlantUMLNode(node, opts) {
 		res = res.replace(/<\/pre>$/, '');
 
 		//Stradex: get the SVG original viewBox attribute
-		let viewBoxString = (new DOMParser()).parseFromString(res, 'application/xml').documentElement.getAttribute('viewBox');
+		let viewBoxString = parse(res).getAttribute('viewBox');
 		res = res.replace(/<\/svg>$/, '');
 		res = res.replace(/^<svg.*?>/, '');
 		res = res.replace(/<\/svg>$/, '');
