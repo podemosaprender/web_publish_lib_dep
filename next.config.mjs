@@ -1,5 +1,6 @@
 import remarkGfm from 'remark-gfm'
-import rehypePlantUml from './src/lib/rehype-plantuml.mjs'
+//Stradex: disabling rehypePlantUml just for testing
+//import rehypePlantUml from './src/lib/rehype-plantuml.mjs'
 import rehypePrettyCode from 'rehype-pretty-code'
 import createMDX from '@next/mdx'
 
@@ -29,7 +30,8 @@ const withMDX = createMDX({
 			remarkGfm, 
 		],
     rehypePlugins: [
-			rehypePlantUml,
+//Stradex: Disabling rehypePlantUml just for testing
+//			rehypePlantUml,
 			rehypePrettyCode,
 		],
   },
