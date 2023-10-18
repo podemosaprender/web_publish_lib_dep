@@ -66,6 +66,12 @@ async function xfrmPlantUMLNode(node, opts) {
 		} catch (error) {
 			res=`<svg height="100" width="100"> <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /> Sorry, your browser does not support inline SVG.  </svg>`;
 		}
+
+		//Remving the <svg> tag
+		res = res.replace(/^<svg.*?>/, '');
+		res = res.replace(/<\/svg>$/, '');
+
+		res = `<svg class='w-100 h-100'>${res}</div>`; 
 		Object.assign(node, await parseSVG(res))
 	} else if (node.children) { 
 		await Promise.all( node.children.map( n => xfrmPlantUMLNode(n, opts)) ) }
