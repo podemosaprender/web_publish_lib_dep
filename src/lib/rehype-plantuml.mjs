@@ -68,10 +68,17 @@ async function xfrmPlantUMLNode(node, opts) {
 		}
 
 		//Remving the <svg> tag
+		res = res.replace(/^<pre>/, '');
+		res = res.replace(/<\/pre>$/, '');
+		res = res.replace(/<\/svg>$/, '');
 		res = res.replace(/^<svg.*?>/, '');
 		res = res.replace(/<\/svg>$/, '');
 
-		res = `<svg class='w-100 h-100'>${res}</div>`; 
+		res = `<svg
+					style="width: inherit; height: inherit;"
+					version="1.1" 
+					viewBox="0 0 31.921 36.45" 
+		xmlns="http://www.w3.org/2000/svg">${res}</svg>`; 
 		Object.assign(node, await parseSVG(res))
 	} else if (node.children) { 
 		await Promise.all( node.children.map( n => xfrmPlantUMLNode(n, opts)) ) }
