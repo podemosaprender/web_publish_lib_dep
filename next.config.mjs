@@ -3,6 +3,13 @@ import rehypePlantUml from './src/lib/rehype-plantuml.mjs'
 import rehypePrettyCode from 'rehype-pretty-code'
 import createMDX from '@next/mdx'
 
+/** @type {import('rehype-pretty-code').Options} */
+const rehypePrettyCodeOptions = {
+	//grid: false,
+	theme: 'one-dark-pro',
+};
+
+
 /**
  * @type {import('next').NextConfig}
  */
@@ -30,7 +37,7 @@ const withMDX = createMDX({
 		],
     rehypePlugins: [
 			rehypePlantUml,
-			rehypePrettyCode,
+			[rehypePrettyCode, rehypePrettyCodeOptions],
 		],
   },
 })
