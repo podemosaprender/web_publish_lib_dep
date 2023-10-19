@@ -6,7 +6,9 @@
    other place or use a different way. */
 
 main h1 {
-    font-size:2rem; font-weight:bold; margin:1rem 0;  
+    font-size:2rem; 
+    font-weight:bold;
+    margin:1rem 0;  
 }
 
 main h1:after {
@@ -27,8 +29,12 @@ main pre:has(>svg) {
     align-items: center;
 }
 
+main pre {
+    background: none !important;
+}
+
 main pre > code {
-    background-color: rgb(35, 35, 35);
+    background-color: rgb(35, 35, 35) !important;
     padding: 0.5rem;
 }
 
