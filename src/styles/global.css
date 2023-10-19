@@ -38,6 +38,17 @@ main pre > code {
     padding: 0.5rem;
 }
 
+main ul {
+    padding: 2rem;
+}
+
+main li {
+    margin: 0.5rem 0.5rem;
+    list-style:disc;
+}
+
+
+
 @media (min-width:640px) {
     main pre > code {
         margin: 1.5rem 1rem;
