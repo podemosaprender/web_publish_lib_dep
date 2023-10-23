@@ -11,7 +11,12 @@ module.exports = {
   theme: {
     extend: {},
   },
+  corePlugins: {
+    preflight: false,
+  },
 	darkMode: "class",
-  plugins: [nextui()],
+  plugins: [
+    require('@tailwindcss/typography'),
+    nextui()],
 }
 
