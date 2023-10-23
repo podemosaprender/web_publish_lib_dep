@@ -1,6 +1,8 @@
 import remarkGfm from 'remark-gfm'
 import rehypePlantUml from './src/lib/rehype-plantuml.mjs'
 import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import createMDX from '@next/mdx'
 
 /** @type {import('rehype-pretty-code').Options} */
@@ -53,6 +55,8 @@ const withMDX = createMDX({
 		rehypePlugins: [
 			rehypePlantUml,
 			[rehypePrettyCode, rehypePrettyCodeOptions],
+			rehypeSlug,
+			[rehypeAutolinkHeadings, {behavior: 'wrap'}],
 		],
 	},
 })
