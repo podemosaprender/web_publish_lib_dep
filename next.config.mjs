@@ -14,32 +14,47 @@ const rehypePrettyCodeOptions = {
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  output: 'export',
+	output: 'export',
 
 	basePath: (process.env.GITHUB_REPOSITORY||'').replace(/^[^\/]*/,''), //ej: "/nextjs-github-pages",
 	//SEE: https://nextjs.org/docs/app/api-reference/next-config-js/basePath
 
-  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+	pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 	//A: Configure `pageExtensions`` to include MDX files
 
 	trailingSlash: true, 
 	//A: Optional: Change links `/me` -> `/me/` and emit `/me.html` -> `/me/index.html`
- 
-  // skipTrailingSlashRedirect: true,
+
+	// skipTrailingSlashRedirect: true,
 	//A: Optional: Prevent automatic `/me` -> `/me/`, instead preserve `href`
+
+	webpack: (
+		config,
+		{ buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
+	) => {
+		//config.optimization.minimize= false;
+
+		console.log("XXX webpack config", config, JSON.stringify(config,(key, value) => (
+            typeof value === 'bigint'
+                ? value.toString()
+                : value 
+        ),2))
+		return config	//A: Important: return the modified config
+	},
+	//SEE: https://nextjs.org/docs/app/api-reference/next-config-js/webpack
 }
- 
+
 const withMDX = createMDX({
-  // Add markdown plugins here, as desired
-  options: {
-    remarkPlugins: [
+	// Add markdown plugins here, as desired
+	options: {
+		remarkPlugins: [
 			remarkGfm, 
 		],
-    rehypePlugins: [
+		rehypePlugins: [
 			rehypePlantUml,
 			[rehypePrettyCode, rehypePrettyCodeOptions],
 		],
-  },
+	},
 })
 
 export default withMDX(nextConfig)
