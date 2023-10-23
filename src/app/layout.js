@@ -26,12 +26,14 @@ export const metadata = {
 		apple: "/apple-touch-icon.png",
 	},
 };
+//		<script src="https://cdn.tailwindcss.com?plugins=typography"></script> 
+//						<article className="prose prose-invert prose-pre:flex prose-pre:justify-center prose-code:w-full container w-full self-center mx-auto max-w-4xl items-center pt-16 px-5 flex-grow">
 
 export default function RootLayout({ children, }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
-			<script src="https://cdn.tailwindcss.com?plugins=typography"></script> 
+			<link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.5.x/dist/typography.min.css" />
 			</head>
 			<body
 				className={clsx(
@@ -42,7 +44,7 @@ export default function RootLayout({ children, }) {
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<div className="relative flex flex-col h-screen">
 						<Navbar />
-						<article className="prose prose-invert prose-pre:flex prose-pre:justify-center prose-code:w-full container w-full self-center mx-auto max-w-4xl items-center pt-16 px-5 flex-grow">
+						<article className="prose-invert container w-full self-center mx-auto max-w-4xl items-center pt-16 px-5 flex-grow">
 							{children}
 						</article>
 						<Footer />
