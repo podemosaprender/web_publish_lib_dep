@@ -42,7 +42,7 @@ export default function RootLayout({ children, }) {
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<div className="relative flex flex-col h-screen">
 						<Navbar />
-						<article className="prose dark:prose-invert container w-full self-center mx-auto max-w-4xl items-center pt-16 px-5 flex-grow">
+						<article className="prose prose-invert prose-pre:flex prose-pre:justify-center prose-code:w-full container w-full self-center mx-auto max-w-4xl items-center pt-16 px-5 flex-grow">
 							{children}
 						</article>
 						<Footer />
