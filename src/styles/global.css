@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* Stradex: this is temporary, I should move styling to some
-   other place or use a different way. */
+   other place or use a different way. 
 
 main h2 {
     font-weight:bold;
@@ -66,3 +66,5 @@ main li {
         margin: 1rem 0;
     }
 }
+
+*/
