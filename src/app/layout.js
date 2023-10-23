@@ -30,7 +30,9 @@ export const metadata = {
 export default function RootLayout({ children, }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<head />
+			<head>
+			<script src="https://cdn.tailwindcss.com?plugins=typography"></script> 
+			</head>
 			<body
 				className={clsx(
 					"min-h-screen bg-background font-sans antialiased",
@@ -40,9 +42,9 @@ export default function RootLayout({ children, }) {
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<div className="relative flex flex-col h-screen">
 						<Navbar />
-						<main className="prose prose-slate container w-full self-center mx-auto max-w-4xl items-center pt-16 px-5 flex-grow">
+						<article className="prose prose-xl prose-slate container w-full self-center mx-auto max-w-4xl items-center pt-16 px-5 flex-grow">
 							{children}
-						</main>
+						</article>
 						<Footer />
 					</div>
 				</Providers>

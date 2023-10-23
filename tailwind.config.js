@@ -8,15 +8,14 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
 	],
+  
   theme: {
     extend: {},
   },
-  corePlugins: {
-    preflight: false,
-  },
 	darkMode: "class",
+  
   plugins: [
-    require('@tailwindcss/typography'),
-    nextui()],
+    nextui(),
+    require('@tailwindcss/typography')],
 }
 
