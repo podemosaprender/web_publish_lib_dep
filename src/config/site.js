@@ -1,4 +1,4 @@
-export type SiteConfig = typeof siteConfig;
+//INFO: configure your site here
 
 export const siteConfig = {
 	name: "Next.js + NextUI",

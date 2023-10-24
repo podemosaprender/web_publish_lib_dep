@@ -1,11 +1,8 @@
-'use client'
+import Link from 'next/link';
+import { pages } from '@/lib/files';
 
-import {Button} from '@nextui-org/button'; 
-
-export default function Page() {
-	return (<>
-    <div>
-      <Button color="primary">Click me</Button>
-    </div>
-	</>)
+export default async function Page() {
+	return (<ul>
+		{ (await pages(__dirname)).map( url => <li><Link href={url}>{url}</Link></li> ) }
+	</ul>)
 }
