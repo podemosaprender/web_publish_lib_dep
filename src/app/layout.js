@@ -14,9 +14,6 @@ import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import { Footer } from '@/components/footer';
 
-import Head from 'next/head';
-import { Metadata } from "next";
-
 import clsx from "clsx";
 
 export const metadata = {
