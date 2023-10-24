@@ -5,6 +5,8 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import createMDX from '@next/mdx'
 
+import { BasePath } from './src/lib/env.mjs';
+
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyCodeOptions = {
 	//grid: false,
@@ -18,8 +20,12 @@ const rehypePrettyCodeOptions = {
 const nextConfig = {
 	output: 'export',
 
-	basePath: (process.env.GITHUB_REPOSITORY||'').replace(/^[^\/]*/,''), //ej: "/nextjs-github-pages",
+	basePath: BasePath,
 	//SEE: https://nextjs.org/docs/app/api-reference/next-config-js/basePath
+	
+	env: { //A: available client side SEE: https://nextjs.org/docs/pages/api-reference/next-config-js/env
+		basePath: BasePath,
+	},
 
 	pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 	//A: Configure `pageExtensions`` to include MDX files

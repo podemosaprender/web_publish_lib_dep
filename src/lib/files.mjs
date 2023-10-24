@@ -8,7 +8,7 @@ export async function files(basePath, filePattern) {
 export async function pages(basePath) {
 	let r= (await files(basePath,'page.js'))
 		.map(fp => ( fp
-			.slice(basePath.length-1)
+			.slice(basePath.length)
 			.replace(/^.*?[\\\/]server[\\\/]app/,'')
 			.replace(/page\.(([tj]s)|(md))x?$/,'')
 		))

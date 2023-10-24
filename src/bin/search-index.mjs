@@ -7,7 +7,7 @@ async function build_index() {
 		.filter( fn => fn.indexOf('404')==-1 )
 		.map( fn => { 
 			let src= fs.readFileSync(fn,'utf-8');
-			let path= fn.slice('./out'.length-1).replace(/[^\/]+\.html$/,'') 
+			let path= fn.slice('out'.length).replace(/[^\/]+\.html$/,'') 
 			return { 
 				id: path,
 				title: (src.match(/<title>([^<]*)/)||[])[1] || path,
