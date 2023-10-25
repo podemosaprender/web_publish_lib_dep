@@ -9,6 +9,7 @@ function SearchFallback() {
 }
 
 export default async function Page() {
+	//SEE: https://nextjs.org/docs/app/api-reference/next-config-js/basePath#links
 	return (<>
 		<Suspense fallback={<SearchFallback />}>
 			<Search />
@@ -16,7 +17,7 @@ export default async function Page() {
 
 		<h2>Pages</h2>
 		<ul>
-			{ (await pages(__dirname)).map( url => <li><Link href={process.env.basePath+url}>{url}</Link></li> ) }
+			{ (await pages(__dirname)).map( url => <li><Link href={url}>{url}</Link></li> ) }
 		</ul>
 
 	</>)
