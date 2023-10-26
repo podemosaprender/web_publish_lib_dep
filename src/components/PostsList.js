@@ -13,9 +13,9 @@ async function getSitePostsData() {
 	if(! siteData_) {
 		let indexUrl=process.env.basePath+'/site-map.txt';
 		try {
-			siteData_ = JSON.parse((await fetch(indexUrl)).text());
+			siteData_ = (await fetch(indexUrl)).json();
 		} catch (error) {
-			console.log("[ERROR] Failed to read site-map.txt");
+			console.log(error);
 		}
 	}
 	return siteData_ ? siteData_ : [];
