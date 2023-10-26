@@ -2,6 +2,7 @@
 "use client"
 
 import React from "react";
+import { useState, useEffect  } from "react";
 import {Link} from "@nextui-org/react";
 
 //A: the index is generated with npm run build
@@ -17,14 +18,25 @@ async function getSitePostsData() {
 			console.log("[ERROR] Failed to read site-map.txt");
 		}
 	}
-	return siteData_;
+	return siteData_ ? siteData_ : [];
 }
 
-export async function PostsList() {
+export function PostsList() {
+
+	const [postsData, setPostsData]= useState([])
+
+	let initSiteData = async (v) => {
+		let res = await getSitePostsData();
+		setPostsData(res);
+	};
+
+	useEffect(() => {
+		initSiteData();
+	}, []);
 
 	return (
 		<ul>
-			{ (await getSitePostsData()).map( postData => <li><Link href={postData.id}>{postData.title}</Link></li> ) }
+			{ postsData.map( postData => <li><Link href={postData.id}>{postData.title}</Link></li> ) }
 		</ul>
 	)
 }

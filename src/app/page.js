@@ -9,6 +9,10 @@ function SearchFallback() {
 	return <>Loading search box</>
 }
 
+function LoadingFallback() {
+	return <p>Loading Data...</p>;
+}
+
 export default async function Page() {
 	//SEE: https://nextjs.org/docs/app/api-reference/next-config-js/basePath#links
 
@@ -18,7 +22,9 @@ export default async function Page() {
 		</Suspense>
 
 		<h2>Pages</h2>
-		<PostsList />
+		<Suspense fallback={<LoadingFallback />}>
+			<PostsList />
+		</Suspense>
 
 	</>)
 }
