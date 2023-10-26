@@ -36,7 +36,7 @@ export function PostsList() {
 
 	return (
 		<ul>
-			{ postsData.map( postData => <li><Link href={postData.id}>{postData.title}</Link></li> ) }
+			{ postsData.map( postData => <li><Link href={process.env.basePath+postData.id}>{postData.title}</Link></li> ) }
 		</ul>
 	)
 }
