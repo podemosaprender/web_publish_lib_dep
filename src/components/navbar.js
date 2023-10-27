@@ -12,7 +12,7 @@ export function Navbar() {
   return (
     <NextUINavbar>
       <NavbarBrand>
-        <Link href="/" className="text-white">
+        <Link href={process.env.basePath + "/"} className="text-white">
           <Image src={process.env.basePath + "/logo.png"} alt="me" width={40} height={40} />
           <p className="font-bold text-inherit">HOME</p>
         </Link>
