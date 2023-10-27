@@ -36,6 +36,11 @@ const nextConfig = {
 	// skipTrailingSlashRedirect: true,
 	//A: Optional: Prevent automatic `/me` -> `/me/`, instead preserve `href`
 
+	//SEE: https://nextjs.org/docs/pages/api-reference/components/image#unoptimized
+	images: {
+        unoptimized: true,
+    },
+
 	webpack: (
 		config,
 		{ buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
