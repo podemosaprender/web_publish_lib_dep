@@ -132,3 +132,6 @@ dist
 # Java executables
 
 *.jar
+
+# Generated ipynb, md and mdx content.
+xnext
