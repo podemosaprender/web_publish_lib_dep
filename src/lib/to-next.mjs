@@ -67,8 +67,8 @@ async function processEntry(apath) {
 
 async function main() {
     let userfiles = (await files(SRC_DIR, "*")) //A: Must filter later.
-        .map(fn => fn.slice(SRC_DIR.length+1)) //A: Remove prefix
-        .filter(fn => fn.indexOf("_build") == -1 && fn.indexOf("README.md") == -1)
+        .map(fn => fn.slice(SRC_DIR.length-1)) //A: Remove prefix //XXX: SRC_DIR.length-1 so it works with ./ or . for SRC_DIR
+        .filter(fn => fn.indexOf("_build") == -1 && fn.indexOf("README.md") == -1 && fn.indexOf("site") == -1)
     console.log({userfiles});
     userfiles.forEach( processEntry );
 }
