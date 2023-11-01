@@ -20,6 +20,7 @@
 		"csv-parse": "^5.5.2",
 		"framer-motion": "^10.16.4",
 		"glob": "^10.3.10",
+		"gray-matter": "^4.0.3",
 		"lorem-ipsum": "^2.0.8",
 		"lunr": "^2.3.9",
 		"next": "latest",
