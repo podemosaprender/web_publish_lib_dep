@@ -22,13 +22,32 @@ async function getSitePostsData() {
 	return sitesData_ ? sitesData_ : [];
 }
 
+//XXX: Why are we getting &amp characters in site-map.txt?
+function ASCIItoUTF8(asciiString) {
+	return asciiString.replace(/&amp;#(\d+);/g, function(match, number) {
+		return String.fromCharCode(Number(number));
+	});
+}
+
 export function PostsList() {
 
 	const [postsData, setPostsData]= useState([])
 
 	let initSiteData = async (v) => {
 		let res = await getSitePostsData();
-		console.log(res);
+
+		//XXX: Why are we getting &amp characters in site-map.txt?
+		res = res.map(r => {
+			if (r.blog_title) { 
+				r.blog_title = ASCIItoUTF8(r.blog_title);
+			}
+			if (r.title) { 
+				r.title = ASCIItoUTF8(r.title);
+			}
+
+			return r;
+		});
+
 		setPostsData(res);
 	};
 
