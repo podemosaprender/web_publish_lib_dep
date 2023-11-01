@@ -4,6 +4,10 @@
 //  * coso/mipagina.mdx -> app/coso/mipagina/page.mdx
 //  * miinforme.ipynb -> app/miinforme/jupyter.html + page.js
 //  * coso/hola.png + page.mdx -> app/coso/page.mdx + hola.png
+//INFO: Metadata Google Collab
+//  * Mejor caso: Front-Matter
+//  * Sino: Buscar primer H1
+//  * Otro caso: Parsear primer div que contiene primer h1 de Markdown
 
 import {files} from './files.mjs'
 import fs from 'fs'
@@ -32,6 +36,7 @@ async function ipynbToHtml(apath, dst_folder) {
     console.log("ipynbToHtml", cmd);
     execSync(cmd);
 }
+
 async function ipynbPageTemplate(dst_folder) {
     fs.writeFileSync(DST_DIR + "/" + dst_folder + "/page.js", IPYNB_PAGE_TPL);
 }
@@ -66,10 +71,14 @@ async function processEntry(apath) {
 }
 
 async function main() {
+    let charsToSlice = ((SRC_DIR.startsWith('.') || SRC_DIR.startsWith('./')) && !SRC_DIR.startsWith('..')) 
+        ? SRC_DIR.length-1
+        : SRC_DIR.length+1;
+    //A: Glob returns path without ./ or ../ so we should slice a shortest prefix. 
     let userfiles = (await files(SRC_DIR, "*")) //A: Must filter later.
-        .map(fn => fn.slice(SRC_DIR.length-1)) //A: Remove prefix //XXX: SRC_DIR.length-1 so it works with ./ or . for SRC_DIR
+        .map(fn => fn.slice(charsToSlice)) //A: Remove prefix //XXX: SRC_DIR.length-1 so it works with ./ or . for SRC_DIR
         .filter(fn => fn.indexOf("_build") == -1 && fn.indexOf("README.md") == -1 && fn.indexOf("site") == -1)
-    console.log({userfiles});
+    //DBG: console.log({userfiles});
     userfiles.forEach( processEntry );
 }
 

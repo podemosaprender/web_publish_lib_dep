@@ -21,7 +21,10 @@ export const metadata = {
 		default: siteConfig.name,
 		template: `%s - ${siteConfig.name}`,
 	},
-	description: siteConfig.description, 
+	description: {
+		default: siteConfig.description, 
+		template: `%s`,
+	},
 
 	themeColor: [
 		{ media: "(prefers-color-scheme: light)", color: "white" },

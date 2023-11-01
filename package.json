@@ -1,9 +1,10 @@
 {
 	"NOtype": "module",
 	"scripts": {
-		"build": "next build; node src/bin/search-index.mjs",
+		"build": "next build . ; node src/bin/search-index.mjs",
 		"dev": "next dev",
-		"start": "next start"
+		"start": "next start",
+		"local": "serve out/"
 	},
 	"dependencies": {
 		"@akebifiky/remark-simple-plantuml": "^1.0.2",
