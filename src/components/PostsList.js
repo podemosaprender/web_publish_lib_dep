@@ -27,7 +27,7 @@ export function PostsList() {
 	const [postsData, setPostsData]= useState([])
 
 	let initSiteData = async (v) => {
-		let res = (await getSitePostsData()).filter(siteData => typeof siteData.blog_title === "string" && siteData.blog_title.length > 0);
+		let res = await getSitePostsData();
 		console.log(res);
 		setPostsData(res);
 	};

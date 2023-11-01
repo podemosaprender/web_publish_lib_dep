@@ -4,16 +4,25 @@
 //  * coso/mipagina.mdx -> app/coso/mipagina/page.mdx
 //  * miinforme.ipynb -> app/miinforme/jupyter.html + page.js
 //  * coso/hola.png + page.mdx -> app/coso/page.mdx + hola.png
-//INFO: Metadata Google Collab
+
+//XXX: Metadata Google Collab
 //  * Mejor caso: Front-Matter
 //  * Sino: Buscar primer H1
 //  * Otro caso: Parsear primer div que contiene primer h1 de Markdown
+
+//XXX: PlantUML Suelto
+/*
+echo "BUILD plantuml"
+curl -Lo plantuml.jar 'https://github.com/plantuml/plantuml/releases/download/v1.2023.12/plantuml-1.2023.12.jar'
+java -jar plantuml.jar -o "$OUT_DIR" -tsvg -darkmode _build/test*.uml
+*/
 
 import {files} from './files.mjs'
 import fs from 'fs'
 import { execSync } from 'child_process'
 import { fileURLToPath } from 'url'
 import path from 'path'
+import matter from "gray-matter";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const IPYNB_PAGE_TPL = fs.readFileSync(__dirname + "/../_ipynb_template.js");
@@ -41,8 +50,29 @@ async function ipynbPageTemplate(dst_folder) {
     fs.writeFileSync(DST_DIR + "/" + dst_folder + "/page.js", IPYNB_PAGE_TPL);
 }
 
+function YAMLFrontMatterToNextMetadata(markdown_src) {
+    if (markdown_src.replace(/\s+/g, ' ').indexOf('export const metadata') > -1) {
+        return markdown_src;
+    }
+
+    let metadata = matter(markdown_src).data || {};
+
+    //DOC: Default title to first markdown header.
+    metadata.title = metadata.title
+        ? metadata.title 
+        : (markdown_src.match(/^# (.+)$/m)||[])[1] || "Untitled"; 
+    
+    metadata.other = { blog_title: metadata.title } //XXX: Used to avoid conflict with Next title when showing post list.
+
+    let next_metadata = "export const metadata = " + JSON.stringify(metadata);
+    let src_no_front_matter = markdown_src.replace(/^---([\s\S]*?)---/, '');
+
+    return next_metadata + "\n\n" + src_no_front_matter;
+}
+
 async function markdownCopyFile(apath, dst_folder) { 
-    fs.writeFileSync(DST_DIR + "/" + dst_folder + "/page.mdx", fs.readFileSync(SRC_DIR + "/" + apath));
+    let mdx_data = fs.readFileSync(SRC_DIR + "/" + apath, 'utf-8');
+    fs.writeFileSync(DST_DIR + "/" + dst_folder + "/page.mdx", YAMLFrontMatterToNextMetadata(mdx_data));
 }
 
 async function processEntry(apath) {
