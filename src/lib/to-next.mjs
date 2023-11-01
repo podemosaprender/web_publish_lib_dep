@@ -14,8 +14,11 @@ import path from 'path'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const IPYNB_PAGE_TPL = fs.readFileSync(__dirname + "/../_ipynb_template.js");
 
-let SRC_DIR = "../publish_on_gitpages_tpl" //XXX: Solo para test
-let DST_DIR = "./src/app" //U: Source files for Next //XXX: Solo para test
+//SEE: https://nodejs.org/docs/latest/api/process.html#process_process_argv
+var args = process.argv.slice(2); 
+
+let SRC_DIR = args[0];
+let DST_DIR = args[1];
 
 async function mkDir(apath) {
     fs.mkdirSync(DST_DIR + "/" + apath, { recursive: true });
