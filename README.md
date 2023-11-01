@@ -14,6 +14,7 @@ Sitios en gitpages usando nextjs y github actions
 Puedo:
   * Editar `config.json` para cambiar footer y links en la barra de navegación.
   * Subir `logo.png`
+  * Editar `sources.json` para agregar otros repos que me gustaría traer con documentos.
 
 ## Uso Intermedio
 
