@@ -34,10 +34,10 @@ export function PostsList() {
 		//XXX: Why are we getting &amp characters in site-map.txt?
 		res = res.map(r => {
 			if (r.blog_title) { 
-				r.blog_title = ASCIItoUTF8(r.blog_title);
+				r.blog_title = ASCIItoUTF8(r.blog_title, 'amp;');
 			}
 			if (r.title) { 
-				r.title = ASCIItoUTF8(r.title);
+				r.title = ASCIItoUTF8(r.title, 'amp;');
 			}
 
 			return r;
