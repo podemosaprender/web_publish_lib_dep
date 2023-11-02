@@ -4,7 +4,6 @@
 import React from "react";
 import { useState, useEffect  } from "react";
 import {Link} from "@nextui-org/react";
-import { ASCIItoUTF8 } from "@/lib/parse-data.mjs";
 
 //A: the index is generated with npm run build
 //A: process.env.basePath is configured in next.config.js
@@ -30,19 +29,6 @@ export function PostsList() {
 
 	let initSiteData = async (v) => {
 		let res = await getSitePostsData();
-
-		//XXX: Why are we getting &amp characters in site-map.txt?
-		res = res.map(r => {
-			if (r.blog_title) { 
-				r.blog_title = ASCIItoUTF8(r.blog_title, 'amp;');
-			}
-			if (r.title) { 
-				r.title = ASCIItoUTF8(r.title, 'amp;');
-			}
-
-			return r;
-		});
-
 		setPostsData(res);
 	};
 

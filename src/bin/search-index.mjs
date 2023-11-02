@@ -16,8 +16,8 @@ async function build_index() {
 		docs.forEach(function (doc) { this.add(doc) }, this);
 	})
 	
-	fs.writeFileSync('./out/search-idx.txt', JSON.stringify(idx), {encoding:"utf8"});
-	fs.writeFileSync('./out/site-map.txt', JSON.stringify(docs.map(({body, ...keepAttrs}) => keepAttrs)), {encoding:"utf8"});
+	fs.writeFileSync('./out/search-idx.txt', JSON.stringify(idx));
+	fs.writeFileSync('./out/site-map.txt', JSON.stringify(docs.map(({body, ...keepAttrs}) => keepAttrs)));
 }
 
 build_index();
