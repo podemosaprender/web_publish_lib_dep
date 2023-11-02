@@ -13408,6 +13408,7 @@ body[data-format='mobile'] .jp-InputPrompt {
   text-align: left;
 }
 
+
 /*-----------------------------------------------------------------------------
 | Copyright (c) Jupyter Development Team.
 | Distributed under the terms of the Modified BSD License.
@@ -13995,3 +13996,26 @@ div.jp-Cell-Placeholder-content-3 {
   top: 140px;
 }
 
+
+/* XXX: Making this template responsive for mobile and small screen devices. */
+@media (max-width: 700px) {
+  .jp-InputArea {
+    flex-direction: column !important;
+  }
+
+  .jp-InputPrompt {
+    flex: 0 0 auto !important;
+    text-align: left !important;
+  }
+  .jp-OutputPrompt {
+    display: none !important;
+  }
+  .jp-OutputArea-prompt {
+    display: none !important;
+  }
+
+  article {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
