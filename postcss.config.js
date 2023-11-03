@@ -1,4 +1,4 @@
-console.log("XXX postcss")
+process.env.DBG && console.log("XXX postcss")
 
 module.exports = {
   plugins: {

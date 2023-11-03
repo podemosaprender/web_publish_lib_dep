@@ -47,7 +47,7 @@ const nextConfig = {
 	) => {
 		//config.optimization.minimize= false;
 
-		console.log("XXX webpack config", config, JSON.stringify(config,(key, value) => (
+		process.env.DBG && console.log("XXX webpack config", config, JSON.stringify(config,(key, value) => (
             typeof value === 'bigint'
                 ? value.toString()
                 : value 
