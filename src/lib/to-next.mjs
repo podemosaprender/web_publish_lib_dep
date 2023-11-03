@@ -32,6 +32,8 @@ var args = process.argv.slice(2);
 
 let SRC_DIR = args[0];
 let DST_DIR = args[1];
+let DST_PUBLIC_DIR = args[2];
+console.log({SRC_DIR, DST_DIR, DST_PUBLIC_DIR})
 
 async function mkDir(apath) {
     fs.mkdirSync(DST_DIR + "/" + apath, { recursive: true });
@@ -75,41 +77,46 @@ async function markdownCopyFile(apath, dst_folder) {
     fs.writeFileSync(DST_DIR + "/" + dst_folder + "/page.mdx", YAMLFrontMatterToNextMetadata(mdx_data));
 }
 
+async function copyFile(apath, dst_folder, dst_name, isStatic) {
+	let data = fs.readFileSync(SRC_DIR + "/" + apath, 'utf-8');
+	fs.writeFileSync((isStatic ? DST_PUBLIC_DIR : DST_DIR) + "/" + dst_folder + "/" + dst_name, data);
+}
+
 async function processEntry(apath) {
-    let src_path = SRC_DIR + "/" + apath;
-    if (fs.statSync(src_path).isDirectory()) {
-        mkDir(apath);
-      } else {
-        if (apath.endsWith(".ipynb")) {
-            let carpeta = apath.endsWith("page.ipynb")
-                ? apath.replace("page.ipynb", "")
-                : apath.replace(".ipynb", ""); 
-            console.log("Procesando ipynb", {apath, carpeta});
-            mkDir(carpeta);
-            ipynbToHtml(apath, carpeta);
-            ipynbPageTemplate(carpeta);
-        } else if (apath.endsWith(".md") || apath.endsWith(".mdx")) { 
-            let file_ext = apath.endsWith(".md") ? '.md' : '.mdx';
-            let carpeta = apath.endsWith("page" + file_ext)
-                ? apath.replace("page" + file_ext, "")
-                : apath.replace(file_ext, ""); 
-            console.log("Procesando mdx", {apath, carpeta});
-            mkDir(carpeta);
-            markdownCopyFile(apath, carpeta);
-        }
-    }
+	let src_path = SRC_DIR + "/" + apath;
+	if (fs.statSync(src_path).isDirectory()) {
+		mkDir(apath);
+	} else {
+		if (apath.endsWith(".ipynb")) {
+			let carpeta = apath.replace(/(page)?\.\w+$/,''); mkDir(carpeta);
+			console.log("Procesando ipynb", {apath, carpeta});
+			ipynbToHtml(apath, carpeta);
+			ipynbPageTemplate(carpeta);
+		} else if (apath.match(/\.mdx?$/)) { 
+			let carpeta = apath.replace(/(page)?\.\w+$/,''); mkDir(carpeta);
+			console.log("Procesando mdx", {apath, carpeta});
+			markdownCopyFile(apath, carpeta);
+		} else if (apath.match(/\.js(x|on)$/)) { //A: js* files MUST be in a folder
+			let carpeta = apath.replace(/[^\\\/]+$/,''); mkDir(carpeta);
+			console.log("Procesando jsx", {apath, carpeta});
+			copyFile(apath, carpeta, );
+		} else { //XXX:MUST go to public
+			let carpeta = apath.replace(/[^\\\/]+$/,''); mkDir(carpeta);
+			console.log("Procesando archivo", {apath, carpeta});
+			copyFile(apath, carpeta, apath.slice(carpeta.length));
+		}
+	}
 }
 
 async function main() {
-    let charsToSlice = ((SRC_DIR.startsWith('.') || SRC_DIR.startsWith('./')) && !SRC_DIR.startsWith('..')) 
-        ? SRC_DIR.length-1
-        : SRC_DIR.length+1;
-    //A: Glob returns path without ./ or ../ so we should slice a shortest prefix. 
-    let userfiles = (await files(SRC_DIR, "*")) //A: Must filter later.
-        .map(fn => fn.slice(charsToSlice)) //A: Remove prefix //XXX: SRC_DIR.length-1 so it works with ./ or . for SRC_DIR
-        .filter(fn => fn.indexOf("_build") == -1 && fn.indexOf("README.md") == -1 && fn.indexOf("site") == -1)
-    //DBG: console.log({userfiles});
-    userfiles.forEach( processEntry );
+	let pfx_len= SRC_DIR.replace(/^\.+/,'').length
+	//A: Glob returns path without ./ or ../ so we should slice a shortest prefix. 
+	let userfiles = (await files(SRC_DIR, "*")) //A: Must filter later.
+		.map(fn => fn.slice(pfx_len)) //A: Remove prefix //XXX: SRC_DIR.length-1 so it works with ./ or . for SRC_DIR
+		.filter(fn => ! fn.match(/^(_build(\/.*)?)|(site(\/.*)?)|(README.md)$/))
+	//DBG: 
+	console.log({userfiles});
+	userfiles.forEach( processEntry );
 }
 
 main();
