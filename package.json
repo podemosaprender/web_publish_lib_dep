@@ -14,7 +14,7 @@
 		"@mdx-js/loader": "^2.3.0",
 		"@mdx-js/react": "^2.3.0",
 		"@next/mdx": "^13.5.4",
-		"@nextui-org/react": "^2.1.13",
+		"@nextui-org/react": "^2.2.0",
 		"@types/mdx": "^2.0.8",
 		"autoprefixer": "^10.4.16",
 		"csv-parse": "^5.5.2",
