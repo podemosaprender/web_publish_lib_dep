@@ -39,3 +39,16 @@ RepoDocumentos necesita tener Github Actions que:
 2. Hagan clone de este RepoGenerador
 3. Ejecuten `src/bin/build.sh`
 4. Despleguen el GitPages 
+
+### P2P
+
+* https://github.com/podemosaprender/xw1/blob/main/juego-compra-venta/juego.js
+* Separate server from client.
+
+
+### Tooling
+
+* nbconvert + index.html.j2 *(Jinja2)*
+* Next *(React)*
+* TailwindCSS
+* PeerJS
