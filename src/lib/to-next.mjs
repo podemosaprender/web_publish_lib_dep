@@ -32,7 +32,7 @@ var args = process.argv.slice(2);
 
 let SRC_DIR = args[0];
 let DST_DIR = args[1];
-let DST_PUBLIC_DIR = args[2];
+let DST_PUBLIC_DIR = args[2]; //XXX: Unused
 console.log({SRC_DIR, DST_DIR, DST_PUBLIC_DIR})
 
 async function mkDir(apath) {

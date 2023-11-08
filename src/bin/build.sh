@@ -8,6 +8,8 @@ fi
 
 ( cd site ; if ! [ -d node_modules ]; then npm ci --legacy-peer-deps ; fi )
 
+cp -R _static/. site/public/ #NodeJS no maneja mover y copiar archivos que no sean texto.
+
 node site/src/lib/to-next.mjs . ./site/src/app ./site/public
 
 ( cd site ; npm run build ) #OJO Actions en RepoDocumentos espera HTML en site/out
