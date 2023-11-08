@@ -3,7 +3,7 @@ import {filesJSONData} from '../lib/files.mjs'
 import fs from 'fs';
 
 async function build_index() {
-	let docs = await filesJSONData('./out', '*.html');
+	let docs = (await filesJSONData('./out', '*.html')).filter(fn => fn.id !== "\\" && fn.id !== "/" );
 
 	var idx = lunr(function () {
 		this.ref('id');
