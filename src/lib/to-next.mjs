@@ -113,7 +113,7 @@ async function main() {
 	//A: Glob returns path without ./ or ../ so we should slice a shortest prefix. 
 	let userfiles = (await files(SRC_DIR, "*")) //A: Must filter later.
 		.map(fn => fn.slice(pfx_len)) //A: Remove prefix //XXX: SRC_DIR.length-1 so it works with ./ or . for SRC_DIR
-		.filter(fn => ! fn.match(/^(_build(\/.*)?)|(site(\/.*)?)|(README.md)$/))
+		.filter(fn => ! fn.match(/^(_build(\/.*)?)|(site(\/.*)?)|(_static(\/.*)?)|(README.md)$|(site.js)$/))
 	//DBG: 
 	console.log({userfiles});
 	userfiles.forEach( processEntry );
