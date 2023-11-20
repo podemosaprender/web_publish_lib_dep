@@ -45,6 +45,8 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Run prepare script
         run: _build/prepare.sh
+      - name: Copy config.json inside site folder
+        run: cp ./config.json ./site 
       - name: Restore cache 
         #XXX: Entender y usar
         #SEE: https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
