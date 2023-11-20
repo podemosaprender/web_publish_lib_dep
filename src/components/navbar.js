@@ -3,7 +3,7 @@ import React from "react";
 import { Navbar as NextUINavbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Input } from "@nextui-org/react";
 import Image from "next/image";
 // read navbar_items from config.json
-import json_navbar_data from "../config.json";
+import json_navbar_data from "../../config.json" assert {type: 'json'};
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
