@@ -21,15 +21,15 @@ export function Navbar() {
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          {
-            json_navbar_data.navbar_items.map(navbar_item => (
+        {
+          json_navbar_data.navbar_items.map(navbar_item => (
+            <NavbarItem>
               <Link color="foreground" href={navbar_item.url}>
                 {navbar_item.name}
               </Link>
-            ))
-          }
-        </NavbarItem>
+            </NavbarItem>
+          ))
+        }
       </NavbarContent>
 
       <NavbarContent as="div" className="items-center" justify="end">
