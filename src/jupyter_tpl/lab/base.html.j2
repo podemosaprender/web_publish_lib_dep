@@ -47,6 +47,8 @@
 
 {% block in_prompt -%}
 <div class="jp-InputPrompt jp-InputArea-prompt">
+		<a class="anchor-link" href="#in_{{ cell.execution_count|replace(None, "&nbsp;") }}">¶</a>
+		<a name="in_{{ cell.execution_count|replace(None, "&nbsp;") }}"/>
     {%- if cell.execution_count is defined -%}
         In&nbsp;[{{ cell.execution_count|replace(None, "&nbsp;") }}]:
     {%- else -%}
@@ -69,6 +71,8 @@
 
 {% block output_area_prompt %}
     <div class="jp-OutputPrompt jp-OutputArea-prompt">
+		<a class="anchor-link" href="#out_{{ cell.execution_count|replace(None, "&nbsp;") }}">¶</a>
+		<a name="out_{{ cell.execution_count|replace(None, "&nbsp;") }}"/>
 {%- if output.output_type == 'execute_result' -%}
     {%- if cell.execution_count is defined -%}
         Out[{{ cell.execution_count|replace(None, "&nbsp;") }}]:
@@ -101,7 +105,7 @@
 {%- if resources.global_content_filter.include_input_prompt-%}
     {{ self.empty_in_prompt() }}
 {%- endif -%}
-<div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput {{ celltags(cell) }}" data-mime-type="text/markdown">
+<div class="container jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput {{ celltags(cell) }}" data-mime-type="text/markdown">
 {%- if resources.should_sanitize_html %}
 {%- set html_value=cell.source  | markdown2html | strip_files_prefix | clean_html -%}
 {%- else %}
