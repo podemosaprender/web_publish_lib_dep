@@ -3,13 +3,14 @@ import React from "react";
 import { Navbar as NextUINavbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Input } from "@nextui-org/react";
 import Image from "next/image";
 
-import { getNavbarItems } from '@config/site' 
+import { getNavbarItems } from '@/config/site' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 
 
 export function Navbar() {
+	const navbar_items= getNavbarItems();
 
   return (
     <NextUINavbar>
