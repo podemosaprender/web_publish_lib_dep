@@ -47,13 +47,13 @@
 
 {% block in_prompt -%}
 <div class="jp-InputPrompt jp-InputArea-prompt">
-		<a class="anchor-link" href="#in_{{ cell.execution_count|replace(None, "&nbsp;") }}">¶</a>
-		<a name="in_{{ cell.execution_count|replace(None, "&nbsp;") }}"/>
     {%- if cell.execution_count is defined -%}
         In&nbsp;[{{ cell.execution_count|replace(None, "&nbsp;") }}]:
     {%- else -%}
         In&nbsp;[&nbsp;]:
     {%- endif -%}
+		<a class="anchor-link" href="#in_{{ cell.execution_count|replace(None, "&nbsp;") }}">¶</a>
+		<a name="in_{{ cell.execution_count|replace(None, "&nbsp;") }}"/>
 </div>
 {%- endblock in_prompt %}
 
@@ -71,8 +71,6 @@
 
 {% block output_area_prompt %}
     <div class="jp-OutputPrompt jp-OutputArea-prompt">
-		<a class="anchor-link" href="#out_{{ cell.execution_count|replace(None, "&nbsp;") }}">¶</a>
-		<a name="out_{{ cell.execution_count|replace(None, "&nbsp;") }}"/>
 {%- if output.output_type == 'execute_result' -%}
     {%- if cell.execution_count is defined -%}
         Out[{{ cell.execution_count|replace(None, "&nbsp;") }}]:
@@ -80,6 +78,8 @@
         Out[&nbsp;]:
     {%- endif -%}
 {%- endif -%}
+		<a class="anchor-link" href="#out_{{ cell.execution_count|replace(None, "&nbsp;") }}">¶</a>
+		<a name="out_{{ cell.execution_count|replace(None, "&nbsp;") }}"/>
     </div>
 {% endblock output_area_prompt %}
 

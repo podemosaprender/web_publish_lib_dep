@@ -41,7 +41,7 @@ async function mkDir(apath) {
 
 async function ipynbToHtml(apath, dst_folder) {
     let src_file = SRC_DIR + "/" + apath;
-    let cmd = "jupyter nbconvert -y --output-dir="  + DST_DIR + "/" + dst_folder + " --to html --template=" + __dirname + "/../jupyter_tpl --theme=dark --output jupyter.html $src_file"
+    let cmd = "jupyter nbconvert -y --output-dir="  + DST_DIR + "/" + dst_folder + " --to html --template=" + __dirname + "/../jupyter_tpl/lab --theme=dark --output jupyter.html $src_file"
     .replace("$src_file", src_file);
 
     console.log("ipynbToHtml", cmd);

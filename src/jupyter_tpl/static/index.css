@@ -13680,7 +13680,7 @@ body[data-format='mobile'] .jp-InputPrompt {
 
 .jp-Notebook .jp-Cell .jp-InputPrompt {
   cursor: move;
-  float: left;
+	text-align: left;
 }
 
 /*-----------------------------------------------------------------------------

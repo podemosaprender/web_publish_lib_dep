@@ -52,6 +52,7 @@
     {%- else -%}
         In&nbsp;[&nbsp;]:
     {%- endif -%}
+		<a class="anchor-link" href="in_{{ cell.execution_count|replace(None, "&nbsp;") }}">¶</a>
 </div>
 {%- endblock in_prompt %}
 
@@ -76,6 +77,7 @@
         Out[&nbsp;]:
     {%- endif -%}
 {%- endif -%}
+			<a class="anchor-link" href="out_{{ cell.execution_count|replace(None, "&nbsp;") }}">¶</a>
     </div>
 {% endblock output_area_prompt %}
 
