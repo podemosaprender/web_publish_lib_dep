@@ -1,6 +1,6 @@
 //INFO: configure your site here
 
-import cfg_json from '../../../config.json';
+import cfg_json from './site_config.json'; //U: copied from enclosing repo if available
 
 export const siteConfig = Object.assign({}, {
 	name: "A Template Blog",

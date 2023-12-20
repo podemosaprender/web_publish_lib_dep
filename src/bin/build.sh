@@ -8,10 +8,11 @@ fi
 
 ( cd site ; if ! [ -d node_modules ]; then npm ci --legacy-peer-deps ; fi )
 
-cp -R _static/. site/public/ #NodeJS no maneja mover y copiar archivos que no sean texto.
+cp -R _static/. site/public/ 
 if [ -f site.js ]; then cp site.js site/src/config/site.js ; fi
-if ! [ -f config.json ]; then echo "{}" > config.json ; fi
+if [ -f config.json ]; then cp config.json ./site/src/config/site_config.json ; fi
+#A: archivos defaults y estaticos mas facil que hacerlo con node
 
 node site/src/lib/to-next.mjs . ./site/src/app ./site/public
 
-( cd site ; npm run build ) #OJO Actions en RepoDocumentos espera HTML en site/out
+( cd site ; npm run build ) #OJO: Actions en RepoDocumentos espera HTML en site/out

@@ -99,7 +99,7 @@ async function processEntry(apath) {
 		} else if (apath.match(/\.js(x|on)$/)) { //A: js* files MUST be in a folder
 			let carpeta = apath.replace(/[^\\\/]+$/,''); mkDir(carpeta);
 			console.log("Procesando jsx", {apath, carpeta});
-			copyFile(apath, carpeta, );
+			copyFile(apath, carpeta,  apath.slice(carpeta.length));
 		} else { //XXX:MUST go to public
 			let carpeta = apath.replace(/[^\\\/]+$/,''); mkDir(carpeta);
 			console.log("Procesando archivo", {apath, carpeta});
