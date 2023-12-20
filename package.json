@@ -17,7 +17,7 @@
 		"@nextui-org/react": "^2.2.0",
 		"@types/mdx": "^2.0.8",
 		"autoprefixer": "^10.4.16",
-		"csv-parse": "^5.5.2",
+		"csv-parse": "^5.5.3",
 		"framer-motion": "^10.16.4",
 		"glob": "^10.3.10",
 		"gray-matter": "^4.0.3",
@@ -41,6 +41,7 @@
 		"rehype-stringify": "^10.0.0",
 		"remark-gfm": "^4.0.0",
 		"shiki": "^0.14.5",
+		"slugify": "^1.6.6",
 		"unified": "^11.0.3"
 	},
 	"engines": {
