@@ -1,7 +1,5 @@
 import { Search } from '@/components/search';
 import { Suspense } from 'react';
-import Link from 'next/link';
-import { pages } from '@/lib/files';
 import { PostsList } from 'components/PostsList';
 
 //SEE: https://nextjs.org/docs/app/api-reference/functions/use-search-params
