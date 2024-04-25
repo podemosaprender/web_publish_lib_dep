@@ -25,7 +25,7 @@ async function parseSVG(contents) {
 	//A: Parse the SVG content to a HAST tree
 	
   for (let child of rootNode.children) {
-		console.log("XXX",child)
+		//DBG: console.log("XXX",child)
     if (child.tagName=='svg') {
       return child;
     }
@@ -56,7 +56,7 @@ async function xfrmPlantUMLNode(node, opts) {
 	}
 	*/
 	if (node.tagName=='code' && node.properties?.className?.indexOf('language-plantuml')>-1) {
-		console.log("xfrmPlantUMLNode",node)
+		//DBG: console.log("xfrmPlantUMLNode",node)
 		let src= node.children[0].value;
     let url = `${opts.baseUrl.replace(/\/$/, "")}/${plantumlEncoder.encode(src)}`;
 		//console.log("xfrmPlantUMLNode",{url, src});

@@ -1,6 +1,6 @@
 const {nextui} = require("@nextui-org/react");
 
-console.log("XXX tailwind config")
+//DBG: console.log("XXX tailwind config")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
