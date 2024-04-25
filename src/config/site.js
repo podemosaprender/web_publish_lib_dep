@@ -1,4 +1,4 @@
-//INFO: configure your site here
+//INFO: more advanced configuration of your can be done here
 
 import cfg_json from './site_config.json'; //U: copied from enclosing repo if available
 
