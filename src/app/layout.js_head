@@ -41,5 +41,5 @@ export const metadata = {
 //XXX:META, og, head, etc.
 
 export default function RootLayout({ children, }) {
-	return (
+	return (<>
 		
