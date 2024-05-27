@@ -11,6 +11,10 @@ async function getJupyterSiteSrc(apath) {
 	return siteSrc_;
 }
 
+//A: Metadata Google Collab
+//  * Mejor caso: Front-Matter
+//  * Sino: Buscar primer H1
+//  * Otro caso: Parsear primer div que contiene primer h1 de Markdown
 export async function generateMetadata() {
 	let htmlSrc = await getJupyterSiteSrc(__dirname+'/jupyter.html');
 	let siteTitle = ASCIItoUTF8(
@@ -20,7 +24,7 @@ export async function generateMetadata() {
 	return {
 	  title: siteTitle,
 	  other: {
-		blog_title: siteTitle
+			blog_title: siteTitle
 	  }
 	};
 };

@@ -5,11 +5,6 @@
 //  * miinforme.ipynb -> app/miinforme/jupyter.html + page.js
 //  * coso/hola.png + page.mdx -> app/coso/page.mdx + hola.png
 
-//XXX: Metadata Google Collab
-//  * Mejor caso: Front-Matter
-//  * Sino: Buscar primer H1
-//  * Otro caso: Parsear primer div que contiene primer h1 de Markdown
-
 //XXX: PlantUML Suelto
 /*
 echo "BUILD plantuml"
@@ -25,7 +20,7 @@ import path from 'path'
 import matter from "gray-matter";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const IPYNB_PAGE_TPL = fs.readFileSync(__dirname + "/../_ipynb_template.js");
+const IPYNB_PAGE_TPL = fs.readFileSync(__dirname + "/../_ipynb_template.js"); //U: page.jsx termplate for Jupyter
 
 //SEE: https://nodejs.org/docs/latest/api/process.html#process_process_argv
 var args = process.argv.slice(2); 
@@ -54,17 +49,18 @@ async function ipynbPageTemplate(dst_folder) {
 
 function YAMLFrontMatterToNextMetadata(markdown_src) {
     if (markdown_src.replace(/\s+/g, ' ').indexOf('export const metadata') > -1) {
-        return markdown_src;
+			//A: tiene metadata como js, usar esa
+      return markdown_src;
     }
 
     let metadata = matter(markdown_src).data || {};
 
-    //DOC: Default title to first markdown header.
     metadata.title = metadata.title
         ? metadata.title 
         : (markdown_src.match(/^# (.+)$/m)||[])[1] || "Untitled"; 
+    //A: Default title to first markdown header.
     
-    metadata.other = { blog_title: metadata.title } //XXX: Used to avoid conflict with Next title when showing post list.
+    metadata.other = { blog_title: metadata.title } //A: avoid conflict with Next title when showing post list.
 
     let next_metadata = "export const metadata = " + JSON.stringify(metadata);
     let src_no_front_matter = markdown_src.replace(/^---([\s\S]*?)---/, '');
