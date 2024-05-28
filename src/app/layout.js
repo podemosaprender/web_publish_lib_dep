@@ -41,6 +41,7 @@ export const metadata = {
 //XXX:META, og, head, etc.
 
 export default function RootLayout({ children, }) {
+	// TEMPLATE_BEGIN
 	return (
 		<html lang={siteConfig.lang || "en"} suppressHydrationWarning>
 			<body
@@ -63,4 +64,5 @@ export default function RootLayout({ children, }) {
 			</body>
 		</html>
 	);
+	// TEMPLATE_END
 }
