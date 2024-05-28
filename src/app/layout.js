@@ -41,6 +41,8 @@ export const metadata = {
 //XXX:META, og, head, etc.
 
 export default function RootLayout({ children, }) {
+	const basePath= process.env.basePath; //U: prefix, eg /mysite/
+
 	// TEMPLATE_BEGIN
 	return (
 		<html lang={siteConfig.lang || "en"} suppressHydrationWarning>

@@ -9,8 +9,8 @@ import { BasePath } from './src/lib/env.mjs';
 
 /** @type {import('rehype-pretty-code').Options} */
 const rehypePrettyCodeOptions = {
-	//grid: false,
-	theme: 'one-dark-pro',
+  //grid: false,
+  theme: 'one-dark-pro',
 };
 
 

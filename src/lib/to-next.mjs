@@ -74,6 +74,7 @@ async function templateCopyFile() {
 		let layout= fs.readFileSync(DST_DIR + '/layout.js', 'utf-8');
 
 		let tplClean= tpl
+			.replace(/class=/g,'className=')
 			.replace(/style=/g,'STYLE=')
 			.replace(/<!--[^]*?-->/g,'')
 			.replace(/<![^]*?>/g,'');
