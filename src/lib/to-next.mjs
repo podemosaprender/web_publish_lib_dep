@@ -20,7 +20,7 @@ import path from 'path'
 import matter from 'gray-matter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const IPYNB_PAGE_TPL = fs.readFileSync(__dirname + '/../_ipynb_template.js'); //U: page.jsx termplate for Jupyter
+const IPYNB_PAGE_TPL = fs.readFileSync(__dirname + "/../_ipynb_template.js"); //U: page.jsx termplate for Jupyter
 
 //SEE: https://nodejs.org/docs/latest/api/process.html#process_process_argv
 var args = process.argv.slice(2); 
@@ -52,13 +52,7 @@ function YAMLFrontMatterToNextMetadata(markdown_src) {
 		//A: tiene metadata como js, usar esa
 		return markdown_src;
 	}
-
 	let metadata = matter(markdown_src).data || {};
-
-	metadata.title = metadata.title
-		? metadata.title 
-		: (markdown_src.match(/^# (.+)$/m)||[])[1] || 'Untitled'; 
-	//A: Default title to first markdown header.
 
 	metadata.other = { blog_title: metadata.title } //A: avoid conflict with Next title when showing post list.
 
